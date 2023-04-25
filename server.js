@@ -91,26 +91,18 @@ app.get('/api/camera/:arduinoId', (req, res) => {
 });
 
 app.get('/api/allArduino', (req, res) => {
-    const sql = `SELECT arduino.*, temp.temperature, temp.humidity, noise.noiseLevel
-FROM arduino
+    const sql = `SELECT a.*, t.temperature, t.humidity
+FROM arduino a
 LEFT JOIN (
   SELECT arduino_id, temperature, humidity
-  FROM temp
+  FROM temp t1
   WHERE datetime = (
     SELECT MAX(datetime)
-    FROM temp
-    WHERE temp.arduino_id = arduino_id
+    FROM temp t2
+    WHERE t1.arduino_id = t2.arduino_id
   )
-) AS temp ON arduino.arduino_id = temp.arduino_id
-LEFT JOIN (
-  SELECT arduino_id, noiseLevel
-  FROM noise
-  WHERE datetime = (
-    SELECT MAX(datetime)
-    FROM noise
-    WHERE noise.arduino_id = arduino_id
-  )
-) AS noise ON arduino.arduino_id = noise.arduino_id;
+) t ON a.arduino_id = t.arduino_id;
+
 `;
 
     // Wykonanie zapytania do bazy danych
@@ -118,7 +110,6 @@ LEFT JOIN (
         if (err) {
             res.status(500).json({error: err.message});
         }else {
-            console.log(result);
             res.status(200).json(result);
         }
     });
