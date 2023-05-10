@@ -61,6 +61,7 @@
 <script>
 import axios from "axios"
 import {initFlowbite} from 'flowbite'
+import moment from 'moment';
 
 export default {
   name: 'HelloWorld',
@@ -75,6 +76,19 @@ export default {
 
     window.setInterval(async () => {
       await axios.get('http://localhost:3000/api/allArduino').then(async resp => {
+
+        resp.data.forEach(item => {
+          const dataTimestamp = moment(item.datetime);
+          const currentTimestamp = moment();
+          if (item.datetime === null) {
+            item.status = 0;
+          }else if (currentTimestamp.diff(dataTimestamp, 'seconds') >= 10) {
+            item.status = 0;
+          } else {
+            item.status = 1;
+          }
+        });
+
         this.arduinos = resp.data
         console.log(resp.data)
       }).catch(error => {

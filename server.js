@@ -91,10 +91,10 @@ app.get('/api/camera/:arduinoId', (req, res) => {
 });
 
 app.get('/api/allArduino', (req, res) => {
-    const sql = `SELECT a.*, t.temperature, t.humidity
+    const sql = `SELECT a.*, t.temperature, t.humidity, t.datetime
 FROM arduino a
 LEFT JOIN (
-  SELECT arduino_id, temperature, humidity
+  SELECT arduino_id, temperature, humidity, datetime
   FROM temp t1
   WHERE datetime = (
     SELECT MAX(datetime)
