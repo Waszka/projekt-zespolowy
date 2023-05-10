@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 25 Kwi 2023, 17:16
+-- Czas generowania: 10 Maj 2023, 12:58
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -67,7 +67,9 @@ INSERT INTO `temp` (`id`, `arduino_id`, `temperature`, `humidity`, `datetime`) V
 (2, 111, 69, 81, '2023-04-24 18:31:27'),
 (3, 666, 35.5, 24, '2023-04-25 14:52:26'),
 (4, 111, 65, 84, '2023-04-25 14:57:38'),
-(5, 111, 40.5, 75, '2023-04-25 15:00:44');
+(5, 111, 40.5, 75, '2023-04-25 15:00:44'),
+(6, 111, 55, 75, '2023-05-10 10:42:21'),
+(7, 666, 15, 10, '2023-05-10 10:44:20');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -99,7 +101,7 @@ ALTER TABLE `arduino`
 -- AUTO_INCREMENT dla tabeli `temp`
 --
 ALTER TABLE `temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
